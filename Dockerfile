@@ -4,7 +4,12 @@ RUN apk add --no-cache bash curl dcron
 
 WORKDIR /usr/src/app
 
-COPY app/ /usr/src/app/
+COPY app/constants.py /usr/src/app/
+COPY app/main.py /usr/src/app/
+COPY app/notification_service.py /usr/src/app/
+COPY app/requirements.txt /usr/src/app/
+COPY app/train_schedule.py /usr/src/app/
+COPY app/utils.py /usr/src/app/
 
 RUN pip install --no-cache-dir -r requirements.txt
 
