@@ -3,7 +3,7 @@ services:
     container_name: train_notifier
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: Dockerfile
     volumes:
         - ./app:/usr/src/app
     environment:

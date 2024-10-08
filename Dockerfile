@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiar el script main.py
 
 # Copiar el entrypoint.sh
-COPY docker/entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Crear un archivo de log para cron
