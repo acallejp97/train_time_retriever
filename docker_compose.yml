@@ -1,0 +1,19 @@
+version: '3'
+services:
+  train_notifier:
+    container_name: train_notifier
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+        - .:/opt/app
+    environment:
+      - CITY=
+      - ORIGIN=
+      - DESTINATION=
+      - TIME_THRESHOLD=1
+      - NOTIFICATION_URL=tgram://<BOT_TOKEN>/<CHAT_ID>
+      - CRON_ONE_WAY=0 8 * * 2-4
+      - CRON_RETURN_1=0 13 * * 2-3
+      - CRON_RETURN_2=0 17 * * 4
+    restart: unless-stopped
