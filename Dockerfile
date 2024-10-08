@@ -3,11 +3,11 @@ FROM python:3.11-alpine
 # Instalar dependencias necesarias, incluyendo bash
 RUN apk add --no-cache bash curl dcron
 
-# Crear directorio de trabajo para la app
 WORKDIR /usr/src/app
+# Crear directorio de trabajo para la app
 
 # Copiar y instalar los requisitos de Python
-COPY app/ /usr/src/app/
+COPY app/* /usr/src/app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar el script main.py
