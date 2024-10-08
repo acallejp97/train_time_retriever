@@ -3,8 +3,7 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - main  # Cambia esto si usas otra rama
-
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,7 +24,7 @@ jobs:
 
     - name: Build the Docker image
       run: |
-        docker build -t ghcr.io/${{ github.repository }}:latest .
+        docker build -t ghcr.io/${{ github.repository }}:latest ./docker
 
     - name: Push the Docker image
       run: |
