@@ -7,7 +7,7 @@ class NotificationService:
 
     def __init__(self):
         self.service = Apprise()
-        self.notification_bot = os.environ.get("NOTIFY")
+        self.notification_bot = os.environ.get("NOTIFICATION_URL")
 
     def send_message(self, messages, origin_name, destination_name):
         if len(messages) == 1:
