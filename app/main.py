@@ -8,8 +8,8 @@ import argparse
 
 def main(origin, destination):
     city = os.environ.get("CITY", "BILBAO").upper()
-    origin_station = origin
-    destination_station = destination
+    origin_station = origin.upper()
+    destination_station = destination.upper()
     threshold = os.environ.get("TIME_THRESHOLD", 1)
 
     core = NUCLEOS[city]
@@ -27,4 +27,5 @@ if __name__ == "__main__":
     parser.add_argument("destination")
 
     args = parser.parse_args()
+
     main(args.origin, args.destination)
