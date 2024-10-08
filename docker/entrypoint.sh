@@ -11,4 +11,4 @@ chmod 0644 /etc/cron.d/cron_execution_2
 chmod 0644 /etc/cron.d/cron_execution_3
 
 # Iniciar cron y mantenerlo corriendo
-cron && tail -f /var/log/cron.log
+crond && tail -f /var/log/cron.log

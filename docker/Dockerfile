@@ -1,7 +1,7 @@
 FROM python:3.11-alpine
 
 # Instalar dependencias necesarias, incluyendo bash
-RUN apk add --no-cache bash curl cron
+RUN apk add --no-cache bash curl dcron
 
 # Crear directorio de trabajo para la app
 WORKDIR /usr/src/app
