@@ -7,7 +7,7 @@ RUN apk add --no-cache bash curl dcron
 WORKDIR /usr/src/app
 
 # Copiar y instalar los requisitos de Python
-COPY app/ ./
+COPY app/ /usr/src/app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar el script main.py
