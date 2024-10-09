@@ -16,3 +16,4 @@ services:
       - CRON_RETURN_2=0 17 * * 4
       - TZ=Europe/Madrid
     restart: unless-stopped
+    command: python bot.py

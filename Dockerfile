@@ -14,5 +14,3 @@ RUN chmod +x /entrypoint.sh
 RUN touch /var/log/cron.log
 
 CMD ["/entrypoint.sh"]
-
-RUN python3 bot.py
