@@ -1,5 +1,5 @@
 from apprise import Apprise
-from utils import get_datetime
+from utils import get_datetime, get_bot_token
 import os
 
 
@@ -7,7 +7,7 @@ class NotificationService:
 
     def __init__(self):
         self.service = Apprise()
-        self.notification_bot = os.environ.get("NOTIFICATION_URL")
+        self.notification_bot = get_bot_token()
 
     def send_message(self, messages, origin_name, destination_name):
         if len(messages) == 1:

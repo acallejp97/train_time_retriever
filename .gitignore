@@ -1,3 +1,4 @@
 test_main.py
 .venv
 .idea
+app/__pycache__
