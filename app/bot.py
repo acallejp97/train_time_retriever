@@ -5,15 +5,15 @@ from telegram.ext._application import Application
 
 from utils import get_bot_token
 
-async def ida(update):
+async def ida(update, context):
     await update.message.reply_text('Buscando trenes de ida')
     subprocess.run(["python", "main.py", os.environ.get("ORIGIN"), os.environ.get("DESTINATION")])
 
-async def vuelta(update):
+async def vuelta(update, context):
     await update.message.reply_text('Buscando trenes de vuelta')
     subprocess.run(["python", "main.py", os.environ.get("DESTINATION"), os.environ.get("ORIGIN")])
 
-async def start(update):
+async def start(update, context):
     await update.message.reply_text('Bot iniciado correctamente')
 
 def main():
