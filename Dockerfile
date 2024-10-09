@@ -1,6 +1,6 @@
 FROM python:3.11-alpine
 
-RUN apk add --no-cache bash curl dcron
+RUN apk add --no-cache bash curl dcron supervisor
 
 WORKDIR /usr/src/app
 
@@ -11,6 +11,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 RUN touch /var/log/cron.log
 
-CMD ["/entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
