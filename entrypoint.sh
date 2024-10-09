@@ -16,4 +16,3 @@ cat /etc/cron.d/cron_execution_3
 
 echo "Starting cron..."
 crond -l 2 && tail -f /var/log/cron.log
-echo "Cron started"

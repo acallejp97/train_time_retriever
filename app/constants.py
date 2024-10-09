@@ -4,8 +4,8 @@ NUCLEOS = {
 
 ESTACIONES = {
     60: {
-        "AMETZOLA": 13200,
-        "ABANDO": 13206,
+        "AMETZOLA": 13206,
+        "ABANDO": 13200,
     }
 }
 
