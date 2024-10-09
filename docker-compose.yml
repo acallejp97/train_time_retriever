@@ -1,11 +1,10 @@
 services:
   train_notifier:
     container_name: train_notifier
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/acallejp97/train_time_retriever:latest
     volumes:
-        - ./app:/usr/src/app
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     environment:
       - CITY=
       - ORIGIN=
@@ -15,4 +14,5 @@ services:
       - CRON_ONE_WAY=0 8 * * 2-4
       - CRON_RETURN_1=0 13 * * 2-3
       - CRON_RETURN_2=0 17 * * 4
+      - TZ=Europe/Madrid
     restart: unless-stopped
