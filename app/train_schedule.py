@@ -1,6 +1,8 @@
 import requests
 from constants import POST_URL
+from utils import as_time
 from utils import get_datetime
+from utils import get_time
 
 
 class TrainSchedule:
@@ -19,7 +21,7 @@ class TrainSchedule:
         response_as_json = r.json()["horario"]
         schedules = []
         for train in response_as_json:
-            if train["linea"] != "C4":
+            if train["linea"] != "C4" and as_time(train["horaSalida"]) >= as_time(get_time()):
                 schedules.append(
                     f"{train['linea']} - {train['horaSalida']} - {train['horaLlegada']} - {train['duracion']}"
                 )
