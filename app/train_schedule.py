@@ -18,14 +18,20 @@ class TrainSchedule:
     def get_train_schedule(self):
         request_string = self.create_request()
         r = requests.post(POST_URL, data=request_string)
-        response_as_json = r.json()["horario"]
-        schedules = []
-        for train in response_as_json:
-            if train["linea"] != "C4" and as_time(train["horaSalida"]) >= as_time(get_time()):
-                schedules.append(
-                    f"{train['linea']} - {train['horaSalida']} - {train['horaLlegada']} - {train['duracion']}"
-                )
-        return schedules
+        try:
+            response = r.json()
+            print(response)
+            response_as_json = response["horario"]
+            schedules = []
+            for train in response_as_json:
+                if train["linea"] != "C4" and as_time(train["horaSalida"]) >= as_time(get_time()):
+                    schedules.append(
+                        f"{train['linea']} - {train['horaSalida']} - {train['horaLlegada']} - {train['duracion']}"
+                    )
+        except KeyError:
+            schedules = ["Ha habido un error con la petición"]
+        finally:
+            return schedules
 
     def create_request(self):
         return (
