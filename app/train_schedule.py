@@ -1,4 +1,5 @@
 import requests
+import json
 from constants import POST_URL
 from utils import as_time
 from utils import get_datetime
@@ -6,7 +7,6 @@ from utils import get_time
 
 
 class TrainSchedule:
-
     def __init__(self, core, origin, destination, threshold):
         self.core = core
         self.date = get_datetime().strftime("%Y%m%d")
@@ -34,17 +34,18 @@ class TrainSchedule:
             return schedules
 
     def create_request(self):
-        return (
-            f"{{"
-            f"'nucleo': {self.core},"
-            f"'origen': {self.origin},"
-            f"'destino': {self.destination},"
-            f"'fchaViaje': {self.date},"
-            f"'validaReglaNegocio': {True},"
-            f"'tiempoReal': {False},"
-            f"'servicioHorarios': 'VTI',"
-            f"'horaViajeOrigen': {self.departure},"
-            f"'horaViajeLlegada': {self.arrival},"
-            f"'accesibilidadTrenes': {False}"
-            f"}}"
-        )
+        request_body = {
+            "accesibilidadTrenes": False,
+            "destino": self.destination,
+            "fchaViaje": self.date,
+            "horaViajeLlegada": self.arrival,
+            "horaViajeOrigen": self.departure,
+            "nucleo": self.core,
+            "origen": self.origin,
+            "servicioHorarios": "VTI",
+            "tiempoReal": False,
+            "validaReglaNegocio": True,
+            "cdgoTerminal": "000000",
+            "cdgoAplicacion": "CER",
+        }
+        return json.dumps(request_body)
