@@ -1,6 +1,8 @@
 FROM python:3.11-alpine
 
-RUN apk add --no-cache bash curl dcron supervisor
+RUN apk add --no-cache bash curl dcron supervisor tzdata
+
+ENV TZ=Europe/Madrid
 
 WORKDIR /usr/src/app
 

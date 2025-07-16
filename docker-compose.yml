@@ -2,9 +2,6 @@ services:
   train_notifier:
     container_name: train_notifier
     image: ghcr.io/acallejp97/train_time_retriever:latest
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
     environment:
       - CITY=
       - ORIGIN=

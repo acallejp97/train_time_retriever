@@ -1,6 +1,6 @@
 # Train Schedule Bot
 
-This project is a Telegram bot that provides train schedules. It uses the Telegram API to interact with users and fetches train schedules from an external API.
+This project is a Telegram bot that provides train schedules. It interacts with users via the Telegram API and fetches train schedules from an external API.
 
 ## Features
 
@@ -11,7 +11,7 @@ This project is a Telegram bot that provides train schedules. It uses the Telegr
 
 ## Requirements
 
-- Python 3.7+
+- Python 3.11+
 - pip (Python package installer)
 
 ## Installation
@@ -46,10 +46,10 @@ This project is a Telegram bot that provides train schedules. It uses the Telegr
 
 ## Project Structure
 
-- `app/bot.py`: Contains the main bot logic and command handlers.
-- `app/train_schedule.py`: Contains the `TrainSchedule` class for fetching train schedules.
-- `app/notification_service.py`: Contains the `NotificationService` class for sending notifications.
-- `app/utils.py`: Contains utility functions.
+- `app/bot.py`: Main bot logic and command handlers.
+- `app/train_schedule.py`: `TrainSchedule` class for fetching train schedules.
+- `app/notification_service.py`: `NotificationService` class for sending notifications.
+- `app/utils.py`: Utility functions.
 
 ## Docker Compose Environment Variables
 
@@ -57,11 +57,20 @@ This project is a Telegram bot that provides train schedules. It uses the Telegr
 |------------------|--------------------------------------|-----------------------------|
 | `CITY`           | The city for which to fetch schedules|                             |
 | `ORIGIN`         | The origin station code              |                             |
-| `DESTINATION`    | The destination station code         | `                           |
+| `DESTINATION`    | The destination station code         |                             |
 | `TIME_THRESHOLD` | Time threshold for schedules         | `1`                         |
-| `NOTIFY`         | Notification service URL             | `tgram://<token>/<chat_id>` |
-| `CRON`           | Cron schedule for running the bot    | `0 8 * * 2 - 4`             |
+| `NOTIFICATION_URL`| Notification service URL            | `tgram://<token>/<chat_id>` |
+| `CRON_ONE_WAY`   | Cron schedule for outbound trains    | `0 8 * * 2-4`               |
+| `CRON_RETURN_1`  | Cron schedule for return trains 1    | `0 13 * * 2-3`              |
+| `CRON_RETURN_2`  | Cron schedule for return trains 2    | `0 17 * * 4`                |
+| `TZ`             | Timezone                             | `Europe/Madrid`             |
 
 ## License
 
 This project is licensed under the MIT License.
+
+
+---
+
+**Author:** Asier Callejo 
+**Contact:** asiercallejo20@gmail.com
