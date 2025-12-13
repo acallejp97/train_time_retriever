@@ -1,5 +1,5 @@
 apprise==1.9.0
 requests==2.32.2
-urllib3==2.2.3
+urllib3==2.6.0
 PyYAML==6.0.2
 python-telegram-bot==21.6
