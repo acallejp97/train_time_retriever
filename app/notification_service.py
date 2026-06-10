@@ -16,5 +16,6 @@ class NotificationService:
         body = f"Origen: {origin_name} - Destino: {destination_name}\n"
         for message in messages:
             body += f"{message}\n"
-        self.service.notify(title=f"Train Schedule {str(get_datetime().strftime('%Y-%m-%d %H:%M'))}", body=body)
+        title = f"Train Schedule {str(get_datetime().strftime('%Y-%m-%d %H:%M'))}"
+        self.service.notify(title=title, body=body)
         print(f"Mensaje enviado con {len(messages) - 1} horarios")
