@@ -1,6 +1,8 @@
 import os
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock
+from unittest.mock import patch
+
 from main import main
 
 
@@ -188,6 +190,7 @@ class TestMainFunction(unittest.TestCase):
         call_args = mock_notification_instance.send_message.call_args[0]
         assert call_args[1] == "AMETZOLA"
         assert call_args[2] == "ABANDO"
+
 
 if __name__ == "__main__":
     unittest.main()

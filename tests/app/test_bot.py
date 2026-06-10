@@ -4,7 +4,6 @@ from unittest.mock import MagicMock
 from unittest.mock import patch
 
 import pytest
-
 from bot import ida
 from bot import main
 from bot import start

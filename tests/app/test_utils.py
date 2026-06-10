@@ -3,7 +3,6 @@ from datetime import datetime
 from unittest.mock import patch
 
 import pytest
-
 from utils import as_time
 from utils import get_bot_token
 from utils import get_datetime
