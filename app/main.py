@@ -1,9 +1,10 @@
-from train_schedule import TrainSchedule
-from constants import NUCLEOS
-from constants import ESTACIONES
-from notification_service import NotificationService
-import os
 import argparse
+import os
+
+from constants import ESTACIONES
+from constants import NUCLEOS
+from notification_service import NotificationService
+from train_schedule import TrainSchedule
 
 
 def main(origin, destination):

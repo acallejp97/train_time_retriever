@@ -1,5 +1,6 @@
-import requests
 import json
+
+import requests
 from constants import POST_URL
 from utils import as_time
 from utils import get_datetime
