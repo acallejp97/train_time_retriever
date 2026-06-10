@@ -4,10 +4,10 @@ from unittest.mock import patch
 
 import pytest
 
-from app.utils import as_time
-from app.utils import get_bot_token
-from app.utils import get_datetime
-from app.utils import get_time
+from utils import as_time
+from utils import get_bot_token
+from utils import get_datetime
+from utils import get_time
 
 
 class TestGetDatetime:
@@ -38,7 +38,7 @@ class TestGetTime:
         # Should not raise exception
         datetime.strptime(result, "%H:%M")
 
-    @patch("app.utils.get_datetime")
+    @patch("utils.get_datetime")
     def test_get_time_with_mocked_datetime(self, mock_datetime):
         """Test get_time with mocked datetime"""
         mock_datetime.return_value = datetime(2025, 12, 25, 14, 30)

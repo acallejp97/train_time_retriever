@@ -2,11 +2,11 @@ from datetime import datetime
 from unittest.mock import MagicMock
 from unittest.mock import patch
 
-from app.train_schedule import TrainSchedule
+from train_schedule import TrainSchedule
 
 
 class TestTrainSchedule:
-    @patch("app.train_schedule.get_datetime")
+    @patch("train_schedule.get_datetime")
     def test_init(self, mock_get_datetime):
         """Test TrainSchedule initialization"""
         mock_get_datetime.return_value = datetime(2025, 12, 25, 14, 0)
@@ -19,7 +19,7 @@ class TestTrainSchedule:
         assert train_schedule.departure == 14
         assert train_schedule.arrival == 16
 
-    @patch("app.train_schedule.get_datetime")
+    @patch("train_schedule.get_datetime")
     def test_init_with_string_threshold(self, mock_get_datetime):
         """Test TrainSchedule initialization with string threshold"""
         mock_get_datetime.return_value = datetime(2025, 12, 25, 10, 0)
@@ -27,7 +27,7 @@ class TestTrainSchedule:
 
         assert train_schedule.arrival == 11
 
-    @patch("app.train_schedule.get_datetime")
+    @patch("train_schedule.get_datetime")
     def test_create_request(self, mock_get_datetime):
         """Test create_request method"""
         mock_get_datetime.return_value = datetime(2025, 12, 25, 14, 0)
@@ -43,9 +43,9 @@ class TestTrainSchedule:
         assert '"accesibilidadTrenes": false' in request
         assert '"tiempoReal": false' in request
 
-    @patch("app.train_schedule.requests.post")
-    @patch("app.train_schedule.get_datetime")
-    @patch("app.train_schedule.get_time")
+    @patch("train_schedule.requests.post")
+    @patch("train_schedule.get_datetime")
+    @patch("train_schedule.get_time")
     def test_get_train_schedule_success(self, mock_get_time, mock_get_datetime, mock_post):
         """Test get_train_schedule with successful response"""
         mock_get_datetime.return_value = datetime(2025, 12, 25, 14, 0)
@@ -68,9 +68,9 @@ class TestTrainSchedule:
         assert len(schedules) == 1
         assert "R1 - 14:30 - 15:30 - 1h" in schedules
 
-    @patch("app.train_schedule.requests.post")
-    @patch("app.train_schedule.get_datetime")
-    @patch("app.train_schedule.get_time")
+    @patch("train_schedule.requests.post")
+    @patch("train_schedule.get_datetime")
+    @patch("train_schedule.get_time")
     def test_get_train_schedule_no_trains(self, mock_get_time, mock_get_datetime, mock_post):
         """Test get_train_schedule with no valid trains"""
         mock_get_datetime.return_value = datetime(2025, 12, 25, 14, 0)
@@ -87,8 +87,8 @@ class TestTrainSchedule:
 
         assert len(schedules) == 0
 
-    @patch("app.train_schedule.requests.post")
-    @patch("app.train_schedule.get_datetime")
+    @patch("train_schedule.requests.post")
+    @patch("train_schedule.get_datetime")
     def test_get_train_schedule_api_error(self, mock_get_datetime, mock_post):
         """Test get_train_schedule when API returns error (missing horario key)"""
         mock_get_datetime.return_value = datetime(2025, 12, 25, 14, 0)
@@ -103,8 +103,8 @@ class TestTrainSchedule:
         assert len(schedules) == 1
         assert schedules[0] == "Ha habido un error con la petición"
 
-    @patch("app.train_schedule.requests.post")
-    @patch("app.train_schedule.get_datetime")
+    @patch("train_schedule.requests.post")
+    @patch("train_schedule.get_datetime")
     def test_get_train_schedule_json_parsing_error(self, mock_get_datetime, mock_post):
         """Test get_train_schedule when response.json() raises an exception"""
         mock_get_datetime.return_value = datetime(2025, 12, 25, 14, 0)
@@ -120,9 +120,9 @@ class TestTrainSchedule:
         assert len(schedules) == 1
         assert schedules[0] == "Ha habido un error con la petición"
 
-    @patch("app.train_schedule.requests.post")
-    @patch("app.train_schedule.get_datetime")
-    @patch("app.train_schedule.get_time")
+    @patch("train_schedule.requests.post")
+    @patch("train_schedule.get_datetime")
+    @patch("train_schedule.get_time")
     def test_get_train_schedule_multiple_trains(self, mock_get_time, mock_get_datetime, mock_post):
         """Test get_train_schedule with multiple valid trains"""
         mock_get_datetime.return_value = datetime(2025, 12, 25, 14, 0)
@@ -146,9 +146,9 @@ class TestTrainSchedule:
         assert "R2 - 15:00 - 16:00 - 1h" in schedules
         assert "R3 - 16:00 - 17:00 - 1h" in schedules
 
-    @patch("app.train_schedule.requests.post")
-    @patch("app.train_schedule.get_datetime")
-    @patch("app.train_schedule.get_time")
+    @patch("train_schedule.requests.post")
+    @patch("train_schedule.get_datetime")
+    @patch("train_schedule.get_time")
     def test_get_train_schedule_train_at_exact_current_time(self, mock_get_time, mock_get_datetime, mock_post):
         """Test get_train_schedule with train at exact current time"""
         mock_get_datetime.return_value = datetime(2025, 12, 25, 14, 0)

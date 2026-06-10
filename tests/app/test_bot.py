@@ -5,15 +5,15 @@ from unittest.mock import patch
 
 import pytest
 
-from app.bot import ida
-from app.bot import main
-from app.bot import start
-from app.bot import vuelta
+from bot import ida
+from bot import main
+from bot import start
+from bot import vuelta
 
 
 class TestBotHandlers:
     @pytest.mark.asyncio
-    @patch("app.bot.subprocess.run")
+    @patch("bot.subprocess.run")
     @patch.dict(os.environ, {"ORIGIN": "AMETZOLA", "DESTINATION": "ABANDO"})
     async def test_ida_handler(self, mock_run):
         """Test ida command handler"""
@@ -29,7 +29,7 @@ class TestBotHandlers:
         mock_run.assert_called_once_with(["python", "main.py", "AMETZOLA", "ABANDO"])
 
     @pytest.mark.asyncio
-    @patch("app.bot.subprocess.run")
+    @patch("bot.subprocess.run")
     @patch.dict(os.environ, {"ORIGIN": "STATION_A", "DESTINATION": "STATION_B"})
     async def test_ida_handler_with_different_stations(self, mock_run):
         """Test ida handler with different station names"""
@@ -41,7 +41,7 @@ class TestBotHandlers:
         mock_run.assert_called_once_with(["python", "main.py", "STATION_A", "STATION_B"])
 
     @pytest.mark.asyncio
-    @patch("app.bot.subprocess.run")
+    @patch("bot.subprocess.run")
     @patch.dict(os.environ, {"ORIGIN": "AMETZOLA", "DESTINATION": "ABANDO"})
     async def test_vuelta_handler(self, mock_run):
         """Test vuelta command handler"""
@@ -57,7 +57,7 @@ class TestBotHandlers:
         mock_run.assert_called_once_with(["python", "main.py", "ABANDO", "AMETZOLA"])
 
     @pytest.mark.asyncio
-    @patch("app.bot.subprocess.run")
+    @patch("bot.subprocess.run")
     @patch.dict(os.environ, {"ORIGIN": "STATION_A", "DESTINATION": "STATION_B"})
     async def test_vuelta_handler_with_different_stations(self, mock_run):
         """Test vuelta handler with different station names"""
@@ -80,7 +80,7 @@ class TestBotHandlers:
         mock_update.message.reply_text.assert_called_once_with("Bot iniciado correctamente")
 
     @pytest.mark.asyncio
-    @patch("app.bot.subprocess.run")
+    @patch("bot.subprocess.run")
     @patch.dict(os.environ, {"ORIGIN": "A", "DESTINATION": "B"})
     async def test_ida_handler_message_type(self, mock_run):
         """Test that ida sends correct message type"""
@@ -93,7 +93,7 @@ class TestBotHandlers:
         assert mock_update.message.reply_text.call_args[0][0] == "Buscando trenes de ida"
 
     @pytest.mark.asyncio
-    @patch("app.bot.subprocess.run")
+    @patch("bot.subprocess.run")
     @patch.dict(os.environ, {"ORIGIN": "A", "DESTINATION": "B"})
     async def test_vuelta_handler_message_type(self, mock_run):
         """Test that vuelta sends correct message type"""
@@ -116,7 +116,7 @@ class TestBotHandlers:
         assert mock_update.message.reply_text.call_args[0][0] == "Bot iniciado correctamente"
 
     @pytest.mark.asyncio
-    @patch("app.bot.subprocess.run")
+    @patch("bot.subprocess.run")
     @patch.dict(os.environ, {"ORIGIN": "AMETZOLA", "DESTINATION": "ABANDO"})
     async def test_ida_handler_subprocess_called_with_python(self, mock_run):
         """Test that ida calls subprocess with 'python' command"""
@@ -131,7 +131,7 @@ class TestBotHandlers:
         assert call_args[1] == "main.py"
 
     @pytest.mark.asyncio
-    @patch("app.bot.subprocess.run")
+    @patch("bot.subprocess.run")
     @patch.dict(os.environ, {"ORIGIN": "AMETZOLA", "DESTINATION": "ABANDO"})
     async def test_vuelta_handler_subprocess_called_with_python(self, mock_run):
         """Test that vuelta calls subprocess with 'python' command"""
@@ -147,8 +147,8 @@ class TestBotHandlers:
 
 
 class TestBotMain:
-    @patch("app.bot.get_bot_token", return_value="test_token")
-    @patch("app.bot.Application")
+    @patch("bot.get_bot_token", return_value="test_token")
+    @patch("bot.Application")
     def test_main_creates_application(self, mock_app_builder, mock_get_token):
         """Test that main() creates an Application"""
         mock_application = MagicMock()
@@ -159,8 +159,8 @@ class TestBotMain:
         # Verify Application.builder was called
         mock_app_builder.builder.assert_called_once()
 
-    @patch("app.bot.get_bot_token", return_value="test_token")
-    @patch("app.bot.Application")
+    @patch("bot.get_bot_token", return_value="test_token")
+    @patch("bot.Application")
     def test_main_calls_get_bot_token(self, mock_app_builder, mock_get_token):
         """Test that main() calls get_bot_token"""
         mock_application = MagicMock()
@@ -171,8 +171,8 @@ class TestBotMain:
         # Verify get_bot_token was called
         mock_get_token.assert_called_once()
 
-    @patch("app.bot.get_bot_token", return_value="test_token")
-    @patch("app.bot.Application")
+    @patch("bot.get_bot_token", return_value="test_token")
+    @patch("bot.Application")
     def test_main_adds_command_handlers(self, mock_app_builder, mock_get_token):
         """Test that main() adds command handlers"""
         mock_application = MagicMock()
@@ -183,8 +183,8 @@ class TestBotMain:
         # Verify add_handler was called 3 times (for start, ida, vuelta)
         assert mock_application.add_handler.call_count == 3
 
-    @patch("app.bot.get_bot_token", return_value="test_token")
-    @patch("app.bot.Application")
+    @patch("bot.get_bot_token", return_value="test_token")
+    @patch("bot.Application")
     def test_main_runs_polling(self, mock_app_builder, mock_get_token):
         """Test that main() runs polling"""
         mock_application = MagicMock()
@@ -195,9 +195,9 @@ class TestBotMain:
         # Verify run_polling was called with 1.0
         mock_application.run_polling.assert_called_once_with(1.0)
 
-    @patch("app.bot.get_bot_token", return_value="test_token")
+    @patch("bot.get_bot_token", return_value="test_token")
     @patch("builtins.print")
-    @patch("app.bot.Application")
+    @patch("bot.Application")
     def test_main_prints_listening_message(self, mock_app_builder, mock_print, mock_get_token):
         """Test that main() prints listening message"""
         mock_application = MagicMock()
